@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export function useAuthenticator() {
@@ -14,7 +13,7 @@ export function useAuthenticator() {
 
   async function LogOut() {
     try {
-      const response = await AuthAPI.get('/logout');
+      await AuthAPI.get('/logout');
     } catch (e) {
       console.log(e);
     }

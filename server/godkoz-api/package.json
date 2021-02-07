@@ -4,7 +4,8 @@
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
-    "build": "webpack -p --config webpack.prod.js --progress",
+    "build": "webpack --config webpack.prod.js --progress",
+    "build:dev": "webpack --progress",
     "clean": "rimraf build",
     "watch": "nodemon ./build/index.js --watch",
     "start": "webpack --watch",

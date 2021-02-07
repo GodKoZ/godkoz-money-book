@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  # mongo
+  godkoz-db:
+    image: mongo:latest
+    container_name: godkoz-db
+    restart: always
+    volumes:
+      - ./godkoz-db:/data/db
+
+  # backend
+  godkoz-service:
+    build:
+      context: ./server/godkoz-api
+      dockerfile: Dockerfile
+      args:
+        PORT: 4000
+        BASE_URL: http://localhost:4000
+        CLIENT_URL: http://localhost
+        COOKIE_PROTOCOL: http
+        COOKIE_DOMAIN: localhost
+        MONGO_URL: mongodb://godkoz-db:27017/godkoz
+        JWT_SECRET: godkoz
+        SESSION_SECRET: godkoz
+        FACEBOOK_CLIENT_ID:
+        FACEBOOK_CLIENT_SECRET:
+        FACEBOOK_CALLBACK_URL:
+        LINE_LOGIN_CHANNEL_ID:
+        LINE_LOGIN_CHANNEL_SECRET:
+        LINE_LOGIN_CALLBACK_URL:
+        GOOGLE_CLIENT_ID:
+        GOOGLE_CLIENT_SECRET:
+        GOOGLE_CALLBACK_URL:
+    container_name: godkoz-api
+    ports:
+      - 4000:4000
+    restart: always
+
+  # frontend
+  godkoz-web-app:
+    build:
+      context: ./client/app
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:4000
+    container_name: web-app
+    restart: always
+    ports:
+      - 80:80

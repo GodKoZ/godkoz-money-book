@@ -15,13 +15,15 @@ const app = express();
 
 connectDatabase();
 
-// todo add mongoose
-app.use(helmet());
 // todo CSRF for write method
+app.use(helmet());
+console.log(process.env.CLIENT_URL);
+if (process.env.CLIENT_URL) {
+  console.log('if', process.env.CLIENT_URL);
+}
 app.use(
   cors({
-    // todo ใส่ whitelist
-    origin: ['https://localhost:3000'],
+    origin: process.env.CLIENT_URL,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   })

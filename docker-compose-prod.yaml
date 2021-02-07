@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  # mongo
+  godkoz-db:
+    image: mongo:latest
+    container_name: godkoz-db
+    restart: always
+    volumes:
+      - ./godkoz-db:/data/db
+
+  # backend
+  godkoz-service:
+    build:
+      context: ./server/godkoz-api
+      dockerfile: Dockerfile
+      args:
+        PORT: 80
+        BASE_URL: https://godkoz-api-dev.ohmpiromrak.com
+        CLIENT_URL: https://godkoz-web-dev.ohmpiromrak.com
+        COOKIE_PROTOCOL: https
+        COOKIE_DOMAIN: .ohmpiromrak.com
+        MONGO_URL: mongodb://godkoz-db:27017/godkoz
+        JWT_SECRET:
+        SESSION_SECRET:
+        FACEBOOK_CLIENT_ID:
+        FACEBOOK_CLIENT_SECRET:
+        FACEBOOK_CALLBACK_URL:
+        LINE_LOGIN_CHANNEL_ID:
+        LINE_LOGIN_CHANNEL_SECRET:
+        LINE_LOGIN_CALLBACK_URL:
+        GOOGLE_CLIENT_ID:
+        GOOGLE_CLIENT_SECRET:
+        GOOGLE_CALLBACK_URL:
+    container_name: godkoz-api
+    restart: always
+    environment:
+      - VIRTUAL_HOST=godkoz-api-dev.ohmpiromrak.com
+      - VIRTUAL_PROTO=http
+      - LETSENCRYPT_HOST=godkoz-api-dev.ohmpiromrak.com
+
+  # frontend
+  godkoz-web-app:
+    build:
+      context: ./client/app
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: https://godkoz-api-dev.ohmpiromrak.com
+    container_name: web-app
+    restart: always
+    environment:
+      - VIRTUAL_HOST=godkoz-web-dev.ohmpiromrak.com
+      - VIRTUAL_PROTO=http
+      - LETSENCRYPT_HOST=godkoz-web-dev.ohmpiromrak.com

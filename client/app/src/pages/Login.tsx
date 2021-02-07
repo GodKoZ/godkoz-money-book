@@ -73,6 +73,7 @@ export default function Login() {
                     <img
                       src="/facebook.svg"
                       style={{ height: '100%', width: '100%' }}
+                      alt="facebook"
                     />
                   </Icon>
                 }
@@ -91,6 +92,7 @@ export default function Login() {
                     <img
                       src="/line.svg"
                       style={{ height: '100%', width: '100%' }}
+                      alt="line"
                     />
                   </Icon>
                 }
@@ -109,6 +111,7 @@ export default function Login() {
                     <img
                       src="/google.svg"
                       style={{ height: '100%', width: '100%' }}
+                      alt="google"
                     />
                   </Icon>
                 }

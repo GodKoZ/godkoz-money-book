@@ -13,7 +13,6 @@ import {
   ExpandMore as ExpandMoreIcon,
   ExitToApp as ExitToAppIcon,
   PersonOutline as PersonOutlineIcon,
-  PersonOutline,
 } from '@material-ui/icons';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
