@@ -7,6 +7,8 @@ services:
     restart: always
     volumes:
       - ./godkoz-db:/data/db
+    networks:
+      - database
 
   # backend
   godkoz-service:
@@ -19,6 +21,7 @@ services:
       - LETSENCRYPT_HOST=godkoz-api-dev.ohmpiromrak.com
     networks:
       - proxy
+      - database
 
   # frontend
   godkoz-web-app:
@@ -36,3 +39,4 @@ networks:
   proxy:
     external:
       name: reverse-proxy
+  database:
