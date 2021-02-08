@@ -13,7 +13,7 @@ app.use(cors());
 app.use(compression());
 app.use(express.static(path.join(__dirname, '../build')));
 
-app.use('/', (req, res) => {
+app.use('*', (req, res) => {
   return res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
