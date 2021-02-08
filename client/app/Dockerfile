@@ -1,5 +1,6 @@
 # Stage 1 - the build process
 FROM node:alpine as builder
+LABEL stage=builder
 
 RUN mkdir -p /usr/src/builder
 
@@ -13,7 +14,6 @@ COPY . .
 
 RUN yarn install --production
 RUN yarn run build
-RUN rm -rf node_modules
 
 
 # Stage 2 - the production environment
@@ -27,9 +27,9 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/builder/build /usr/src/app/build
 COPY --from=builder /usr/src/builder/server /usr/src/app/server
 
-RUN rm -rf /usr/src/builder
+WORKDIR /usr/src/app/server
 
-EXPOSE 80
+RUN yarn install --production
 
-CMD ["pm2-runtime", "start", "./server/index.js"]
+CMD ["pm2-runtime", "start", "index.js"]
 

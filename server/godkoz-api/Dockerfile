@@ -1,5 +1,6 @@
 # Stage 1 - the build process
 FROM node:alpine as builder
+LABEL stage=builder
 
 RUN mkdir -p /usr/src/builder
 
@@ -46,7 +47,6 @@ COPY . .
 
 RUN yarn install
 RUN yarn run build
-RUN rm -rf node_modules
 
 
 # Stage 2 - the production environment
@@ -58,7 +58,5 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY --from=builder /usr/src/builder/build /usr/src/app
-
-RUN rm -rf /usr/src/builder
 
 CMD ["pm2-runtime", "start", "bundle.js"]
