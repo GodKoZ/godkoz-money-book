@@ -7,4 +7,6 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+WORKDIR /usr/src/app/build
+
 CMD ["pm2-runtime", "start", "bundle.js"]
