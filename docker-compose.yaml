@@ -17,6 +17,8 @@ services:
       - VIRTUAL_HOST=godkoz-api-dev.ohmpiromrak.com
       - VIRTUAL_PROTO=http
       - LETSENCRYPT_HOST=godkoz-api-dev.ohmpiromrak.com
+    networks:
+      - proxy
 
   # frontend
   godkoz-web-app:
@@ -27,3 +29,10 @@ services:
       - VIRTUAL_HOST=godkoz-web-dev.ohmpiromrak.com
       - VIRTUAL_PROTO=http
       - LETSENCRYPT_HOST=godkoz-web-dev.ohmpiromrak.com
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external:
+      name: reverse-proxy
