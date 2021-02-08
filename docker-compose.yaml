@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  # mongo
+  godkoz-db:
+    image: mongo:latest
+    container_name: godkoz-db
+    restart: always
+    volumes:
+      - ./godkoz-db:/data/db
+
+  # backend
+  godkoz-service:
+    build: ./server/godkoz-api
+    container_name: godkoz-api
+    restart: always
+    environment:
+      - VIRTUAL_HOST=godkoz-api-dev.ohmpiromrak.com
+      - VIRTUAL_PROTO=http
+      - LETSENCRYPT_HOST=godkoz-api-dev.ohmpiromrak.com
+
+  # frontend
+  godkoz-web-app:
+    build: ./client/app
+    container_name: web-app
+    restart: always
+    environment:
+      - VIRTUAL_HOST=godkoz-web-dev.ohmpiromrak.com
+      - VIRTUAL_PROTO=http
+      - LETSENCRYPT_HOST=godkoz-web-dev.ohmpiromrak.com
