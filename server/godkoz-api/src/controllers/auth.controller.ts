@@ -46,7 +46,22 @@ export function AuthCallback() {
 
 export function LogOut() {
   return async (req: Request, res: Response) => {
-    res.cookie('godkoz_id', '', { maxAge: 0 });
+    if (process.env.NODE_ENV === 'production') {
+      // todo set secure, sameSite, domain
+      res.cookie('godkoz_id', 'removed', {
+        httpOnly: true,
+        // sameSite: true,\
+        domain: process.env.COOKIE_DOMAIN,
+        secure: process.env.COOKIE_PROTOCOL === 'https',
+        path: '/',
+        maxAge: 0,
+      });
+    } else {
+      res.cookie('godkoz_id', 'removed', {
+        httpOnly: true,
+        maxAge: 0,
+      });
+    }
 
     return res.json({
       success: true,
