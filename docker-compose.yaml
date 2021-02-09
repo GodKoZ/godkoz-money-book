@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   # mongo
   godkoz-db:
@@ -16,9 +16,9 @@ services:
     container_name: godkoz-api
     restart: always
     environment:
-      - VIRTUAL_HOST=godkoz-api-dev.ohmpiromrak.com
+      - VIRTUAL_HOST=godkoz-api-dev.chayaninrojarat.dev
       - VIRTUAL_PROTO=http
-      - LETSENCRYPT_HOST=godkoz-api-dev.ohmpiromrak.com
+      - LETSENCRYPT_HOST=godkoz-api-dev.chayaninrojarat.dev
     networks:
       - proxy
       - database
@@ -29,9 +29,9 @@ services:
     container_name: web-app
     restart: always
     environment:
-      - VIRTUAL_HOST=godkoz-web-dev.ohmpiromrak.com
+      - VIRTUAL_HOST=godkoz-web-dev.chayaninrojarat.dev
       - VIRTUAL_PROTO=http
-      - LETSENCRYPT_HOST=godkoz-web-dev.ohmpiromrak.com
+      - LETSENCRYPT_HOST=godkoz-web-dev.chayaninrojarat.dev
     networks:
       - proxy
 
