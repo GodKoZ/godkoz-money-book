@@ -16,9 +16,9 @@ services:
     container_name: godkoz-api
     restart: always
     environment:
-      - VIRTUAL_HOST=godkoz-api-dev.chayaninrojarat.dev
+      - VIRTUAL_HOST=eiei-api-dev.chayaninrojarat.dev
       - VIRTUAL_PROTO=http
-      - LETSENCRYPT_HOST=godkoz-api-dev.chayaninrojarat.dev
+      - LETSENCRYPT_HOST=eiei-api-dev.chayaninrojarat.dev
     networks:
       - proxy
       - database
@@ -29,9 +29,9 @@ services:
     container_name: web-app
     restart: always
     environment:
-      - VIRTUAL_HOST=godkoz-web-dev.chayaninrojarat.dev
+      - VIRTUAL_HOST=eiei-web-dev.chayaninrojarat.dev
       - VIRTUAL_PROTO=http
-      - LETSENCRYPT_HOST=godkoz-web-dev.chayaninrojarat.dev
+      - LETSENCRYPT_HOST=eiei-web-dev.chayaninrojarat.dev
     networks:
       - proxy
 
